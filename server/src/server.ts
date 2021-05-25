@@ -1,3 +1,5 @@
+import { Error } from "mongoose";
+
 // Config
 if (process.env.NODE_ENV != "production") {
   require("dotenv").config();
@@ -18,11 +20,20 @@ const userRoutes = require("./routers/userRoutes");
 mongoose.connect(
   process.env.MONGODB_URI,
   { useUnifiedTopology: true, useNewUrlParser: true, useCreateIndex: true },
-  (err) => {
+  (err:Error) => {
     if (err) return console.log(err);
     console.log("DB Connected");
   }
 );
+
+// Auth global
+declare global {
+  namespace Express {
+    interface Request {
+      id: number
+    }
+  }
+}
 
 // Middlewares
 app.use(express.json());
@@ -33,7 +44,7 @@ app.use(morgan("common"));
 app.use("/auth", userRoutes);
 
 const PORT = process.env.PORT || 5001;
-app.listen(PORT, (err) => {
+app.listen(PORT, (err:Error) => {
   if (err) throw err;
   console.log(`Listening at http://localhost:${PORT}`);
 });

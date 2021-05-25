@@ -1,11 +1,14 @@
-const express = require("express");
-const router = express.Router();
+import { Router,Response,Request } from "express";
+
 const { User, validateUser } = require("../models/User");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const auth = require("../middleware/auth");
+
+const router = Router()
+
 // register
-router.post("/", async (req, res) => {
+router.post("/", async (req:Request, res:Response) => {
   try {
     const { email, password, passwordVerify } = req.body;
     const output = validateUser({
@@ -47,7 +50,7 @@ router.post("/", async (req, res) => {
   }
 });
 
-router.post("/login", async (req, res) => {
+router.post("/login", async (req:Request, res:Response) => {
   try {
     const { email, password } = req.body;
     console.log(email);
@@ -75,7 +78,7 @@ router.post("/login", async (req, res) => {
   }
 });
 
-router.get("/logout", (req, res) => {
+router.get("/logout", (req:Request, res:Response) => {
   console.log("Logging out");
   res
     .cookie("token", "", {
@@ -85,11 +88,11 @@ router.get("/logout", (req, res) => {
     .send();
 });
 
-router.get("/hidden", auth, (req, res) => {
+router.get("/hidden", auth, (req:Request, res:Response) => {
   res.json({ data: "kunal is handsome" });
 });
 
-router.get("/loggedin", async (req, res) => {
+router.get("/loggedin", async (req:Request, res:Response) => {
   try {
     const token = req.cookies.token;
     if (!token) return res.json(false);

@@ -1,5 +1,7 @@
+import {Request,Response,NextFunction} from "express";
 const jwt = require("jsonwebtoken");
-function auth(req, res, next) {
+
+function auth(req:Request, res:Response, next:NextFunction) {
   try {
     const token = req.cookies.token;
     if (!token) return res.status(401).json({ errMsg: "unauthorized" });
