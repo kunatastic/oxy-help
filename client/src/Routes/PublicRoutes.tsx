@@ -20,9 +20,9 @@ export default function PublicRoutes() {
           <Route exact path="/login">
             <Login />
           </Route>
-          {/* <Route path="/*">
+          <Route path="/*">
             <PageNotFound />
-          </Route> */}
+          </Route>
         </Switch>
       </Router>
     </>

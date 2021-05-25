@@ -16,10 +16,10 @@ export default function PrivateRoutes() {
           <Route exact path="/">
             <Hidden />
           </Route>
-          {/* <Route exact path="/404">
+          <Route exact path="/404">
             <PageNotFound />
           </Route>
-          <Redirect to="/404" /> */}
+          <Redirect to="/404" />
         </Switch>
       </Router>
     </>
