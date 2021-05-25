@@ -17,9 +17,15 @@ A Basic JWT based Authorization in NodeJs and React.
 
 ## Tech Stack
 
-1. NodeJs (in JavaScript)
+1. NodeJs (in TypeScript)
 2. ReactJs (in TypeScript)
 3. MongoDB (DataBase)
+
+## .env file
+
+    PORT = 5000
+    MONGODB_URI=mongodb://localhost:27017/auth (local mongoDB URI)
+    JWT_SECRET=rjeiorg3234ijo3jeg (any random string)
 
 ## Connection between front-end and back-end
 
