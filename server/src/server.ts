@@ -10,6 +10,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const cookieParser = require("cookie-parser");
 const morgan = require("morgan");
+const path = require("path");
 
 const app = express();
 
@@ -39,6 +40,7 @@ declare global {
 app.use(express.json());
 app.use(cookieParser());
 app.use(morgan("common"));
+app.use(express.static(path.join(__dirname,'public')));
 
 // Routes
 app.use("/auth", userRoutes);

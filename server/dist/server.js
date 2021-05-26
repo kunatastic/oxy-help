@@ -9,6 +9,7 @@ var express = require("express");
 var mongoose = require("mongoose");
 var cookieParser = require("cookie-parser");
 var morgan = require("morgan");
+var path = require("path");
 var app = express();
 // Custom imports
 var userRoutes = require("./routers/userRoutes");
@@ -22,6 +23,7 @@ mongoose.connect(process.env.MONGODB_URI, { useUnifiedTopology: true, useNewUrlP
 app.use(express.json());
 app.use(cookieParser());
 app.use(morgan("common"));
+app.use(express.static(path.join(__dirname, 'public')));
 // Routes
 app.use("/auth", userRoutes);
 var PORT = process.env.PORT || 5001;

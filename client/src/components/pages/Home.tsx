@@ -1,10 +1,11 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import HomeNav from "../Layouts/Home/HomeNav";
 
 export default function Home() {
   return (
     <>
-      <h1>HOME PATH OP</h1>
+      <HomeNav />
       <button>
         <Link to="/login">Login</Link>
       </button>
