@@ -7,7 +7,7 @@ import {
 } from "react-router-dom";
 import Login from "../components/auth/Login";
 import Register from "../components/auth/Register";
-import Home from "../components/pages/Home";
+import Home from "../components/Layouts/Home/Home";
 import PageNotFound from "../components/pages/PageNotFound";
 
 export default function PublicRoutes() {

@@ -21,6 +21,7 @@ export default function Logout() {
       height="48px"
       width="200px"
       border="2px"
+      colorScheme="pink"
       borderColor="red.500"
       onClick={logout}
     >
