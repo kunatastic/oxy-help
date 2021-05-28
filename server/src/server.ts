@@ -1,3 +1,4 @@
+import { Request, Response } from "express";
 import { Error } from "mongoose";
 
 // Config
@@ -43,6 +44,9 @@ app.use(morgan("common"));
 app.use(express.static(path.join(__dirname,'public')));
 
 // Routes
+app.get("/",  (req: Request, res: Response) => {
+  res.send("Hello World");
+});
 app.use("/auth", userRoutes);
 
 const PORT = process.env.PORT || 5001;
