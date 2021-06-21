@@ -34,3 +34,8 @@ The connection is established using the proxy at http://localhost:5000 (Server i
 If you are using the proxy for connecting front-end and back-end CORS needed be enables. hence this setup does not have CORS enabled by default.
 
 Thanks ![@kunatastic](https://www.linkedin.com/in/kunal-kumar-jha/)
+
+## Me me and me
+
+1. [ ] Form completions
+2. [ ] Sending and retreiving from the server
