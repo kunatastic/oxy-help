@@ -1,4 +1,5 @@
 import React from "react";
+import { MapContainer } from "react-leaflet";
 import {
   BrowserRouter as Router,
   Switch,
@@ -11,17 +12,25 @@ import PageNotFound from "../components/pages/PageNotFound";
 export default function PrivateRoutes() {
   return (
     <>
-      <Router>
-        <Switch>
-          <Route exact path="/">
-            <Hidden />
-          </Route>
-          <Route exact path="/404">
-            <PageNotFound />
-          </Route>
-          <Redirect to="/404" />
-        </Switch>
-      </Router>
+      <MapContainer
+        style={{ height: "100vh" }}
+        center={[28.63576, 77.22445]}
+        zoom={5}
+        s
+        scrollWheelZoom={true}
+      >
+        <Router>
+          <Switch>
+            <Route exact path="/">
+              <Hidden />
+            </Route>
+            <Route exact path="/404">
+              <PageNotFound />
+            </Route>
+            <Redirect to="/404" />
+          </Switch>
+        </Router>
+      </MapContainer>
     </>
   );
 }

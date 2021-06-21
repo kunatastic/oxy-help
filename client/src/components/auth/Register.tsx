@@ -6,13 +6,7 @@ import RegisterNav from "../Layouts/Register/RegisterNav";
 export default function Register() {
   return (
     <>
-      <Box
-        height="100vh"
-        bg="blue.900"
-        color="blue.200"
-        border="2"
-        borderColor="pink"
-      >
+      <Box height="100vh">
         <Container maxW="container.lg" pt="2">
           <RegisterNav />
           <Center
@@ -21,7 +15,6 @@ export default function Register() {
             py={{ md: "20vh", base: "10vh" }}
             my="10vh"
             w="60%"
-            bg="blue.200"
             borderRadius="xl"
             boxShadow="dark-lg"
           >

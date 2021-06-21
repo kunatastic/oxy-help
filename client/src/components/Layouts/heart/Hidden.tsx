@@ -7,15 +7,9 @@ import HiddenNav from "./HiddenNav";
 export default function Hidden() {
   return (
     <>
-      <Box
-        height="100vh"
-        bg="blue.900"
-        color="blue.200"
-        // border="2"
-        // borderColor="pink"
-      >
+      <Box height="100vh" color="blue.200">
         <AddModel />
-        {/* <HiddenNav /> */}
+        <HiddenNav />
         <DrawMap />
       </Box>
     </>
