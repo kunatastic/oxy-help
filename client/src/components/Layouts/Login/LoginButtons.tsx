@@ -9,12 +9,12 @@ export default function LoginButtons() {
         <Box>
           <Link to="/">
             <Button colorScheme="blue" width="24">
-              Home
+              🏠Home
             </Button>
           </Link>
           <Link to="/register">
             <Button colorScheme="blue" ml="4" width="24">
-              Register
+              ®Register
             </Button>
           </Link>
         </Box>

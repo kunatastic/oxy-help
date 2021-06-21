@@ -1,4 +1,4 @@
-import L from "leaflet";
+import L, { LatLngExpression } from "leaflet";
 import React from "react";
 import { Circle, Marker, Popup } from "react-leaflet";
 
@@ -8,13 +8,28 @@ var myIcon = L.icon({
   popupAnchor: [0, 0],
 });
 
-export default function MyMarker({ position, msg }: any) {
+export default function MyMarker({
+  position,
+  msg,
+  zoomLevel,
+  pathOptions,
+}: {
+  position: LatLngExpression;
+  msg: String;
+  zoomLevel: number;
+  pathOptions: L.PathOptions;
+}) {
+  var rad = Math.max(
+    Math.ceil(Math.pow(0.8, 20 - zoomLevel) * Math.exp(20 - zoomLevel)),
+    Math.exp(zoomLevel)
+  );
   return (
     <>
       <Marker position={position} icon={myIcon}>
         <Popup>{msg}</Popup>
       </Marker>
-      <Circle center={position} radius={20000} />
+      {console.log(zoomLevel, rad)}
+      <Circle center={position} radius={rad} pathOptions={pathOptions} />
     </>
   );
 }

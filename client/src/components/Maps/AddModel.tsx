@@ -11,13 +11,11 @@ import {
   ModalHeader,
   ModalOverlay,
 } from "@chakra-ui/modal";
-import React from "react";
+import { InputGroup, InputLeftAddon } from "@chakra-ui/react";
+import React, { useState } from "react";
 
 export default function AddModel() {
   const { isOpen, onOpen, onClose } = useDisclosure();
-
-  const initialRef: any = React.useRef();
-  const finalRef: any = React.useRef();
 
   return (
     <>
@@ -29,45 +27,83 @@ export default function AddModel() {
         top="10px"
         colorScheme="pink"
       >
-        Open Modal
+        Give Details
       </Button>
 
       <Modal
-        initialFocusRef={initialRef}
-        finalFocusRef={finalRef}
         isOpen={isOpen}
-        colorScheme="blackAlpha"
         onClose={onClose}
+        closeOnOverlayClick={false}
+        colorScheme="green"
       >
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader>Create your account</ModalHeader>
+          <ModalHeader>Add details</ModalHeader>
+          <ModalForm onClose={onClose} />
           <ModalCloseButton />
-          <ModalBody pb={6}>
-            <FormControl>
-              <FormLabel>First name</FormLabel>
-              <Input
-                ref={initialRef}
-                variant="outline"
-                colorScheme="cyan"
-                placeholder="First name"
-              />
-            </FormControl>
-
-            <FormControl mt={4}>
-              <FormLabel>Last name</FormLabel>
-              <Input placeholder="Last name" />
-            </FormControl>
-          </ModalBody>
-
-          <ModalFooter>
-            <Button colorScheme="blue" mr={3}>
-              Save
-            </Button>
-            <Button onClick={onClose}>Cancel</Button>
-          </ModalFooter>
         </ModalContent>
       </Modal>
     </>
   );
 }
+const ModalForm = ({ onClose }: { onClose: () => void }) => {
+  const [name, setName] = useState("");
+  const [mobileNumber, setMobileNumber] = useState("");
+  const [areaName, setAreaName] = useState("");
+
+  const userDetails = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    console.log(name, mobileNumber);
+  };
+
+  return (
+    <>
+      <form onSubmit={userDetails}>
+        <ModalBody pb={6}>
+          <FormControl>
+            <FormLabel>Your name: </FormLabel>
+            <Input
+              variant="outline"
+              colorScheme="cyan"
+              placeholder="Enter your name here... "
+              onChange={(e) => setName(e.target.value)}
+              value={name}
+            />
+          </FormControl>
+
+          <FormControl mt={4}>
+            <FormLabel>Mobile Number:</FormLabel>
+            <InputGroup>
+              <InputLeftAddon children="+91" />
+              <Input
+                type="tel"
+                colorScheme="cyan"
+                placeholder="Your mobile number..."
+                onChange={(e) => setMobileNumber(e.target.value)}
+                value={mobileNumber}
+              />
+            </InputGroup>
+          </FormControl>
+
+          <FormControl mt={4}>
+            <FormLabel>Give your area name location:</FormLabel>
+            <Input
+              variant="outline"
+              colorScheme="cyan"
+              placeholder="Enter your area name here... "
+              onChange={(e) => setAreaName(e.target.value)}
+              value={areaName}
+            />
+          </FormControl>
+        </ModalBody>
+
+        <ModalFooter>
+          <Button type="submit" colorScheme="blue" mr={3}>
+            Save
+          </Button>
+          <Button onClick={onClose}>Cancel</Button>
+        </ModalFooter>
+      </form>
+    </>
+  );
+};
