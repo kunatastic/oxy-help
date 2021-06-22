@@ -70,7 +70,7 @@ router.post("/login", async (req:Request, res:Response) => {
         .cookie("token", token, {
           httpOnly: true,
         })
-        .json({ msg: "USER LOGGED IN" });
+        .json({ id: userExist._id });
     }
   } catch (err) {
     console.log(err);

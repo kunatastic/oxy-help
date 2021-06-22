@@ -17,6 +17,7 @@ const app = express();
 
 // Custom imports
 const userRoutes = require("./routers/userRoutes");
+const mapRoutes = require("./routers/mapRoutes");
 
 // connecting DB
 mongoose.connect(
@@ -48,6 +49,7 @@ app.get("/",  (req: Request, res: Response) => {
   res.send("Hello World");
 });
 app.use("/auth", userRoutes);
+app.use("/auth/map", mapRoutes);
 
 const PORT = process.env.PORT || 5001;
 app.listen(PORT, (err:Error) => {

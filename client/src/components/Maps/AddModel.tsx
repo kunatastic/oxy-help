@@ -12,9 +12,11 @@ import {
   ModalOverlay,
 } from "@chakra-ui/modal";
 import { InputGroup, InputLeftAddon } from "@chakra-ui/react";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useMap, useMapEvents } from "react-leaflet";
 import { LatLngExpression, Map } from "leaflet";
+import { MdLocationSearching } from "react-icons/md";
+import axios from "axios";
 
 export default function AddModel() {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -32,12 +34,7 @@ export default function AddModel() {
         Give Details
       </Button>
 
-      <Modal
-        isOpen={isOpen}
-        onClose={onClose}
-        closeOnOverlayClick={false}
-        colorScheme="green"
-      >
+      <Modal isOpen={isOpen} onClose={onClose} closeOnOverlayClick={false}>
         <ModalOverlay />
         <ModalContent>
           <ModalHeader>Add details</ModalHeader>
@@ -52,25 +49,42 @@ const ModalForm = ({ onClose }: { onClose: () => void }) => {
   const [name, setName] = useState("");
   const [mobileNumber, setMobileNumber] = useState("");
   const [areaName, setAreaName] = useState("");
-  const [position, setPosition] = useState<LatLngExpression>([0, 0]);
+  const [cylinders, setCylinders] = useState(0);
+  const [position, setPosition] = useState({
+    lat: 0,
+    lng: 0,
+  });
 
   const userDetails = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log(name, mobileNumber);
+
+    const payload = {
+      user_id: localStorage.getItem("dont_change_this_user_id"),
+      name,
+      mobileNumber,
+      areaName,
+      position,
+      cylinders,
+    };
+    console.log(payload);
+
+    const newLocation = await axios.post("/auth/map/newLocation", payload);
+    console.log(newLocation);
   };
 
-  // const map = useMap();
+  const map: Map = useMap();
 
-  const map = useMapEvents({
-    click() {
-      map.locate();
-    },
-    locationfound(e) {
-      console.log(e.latlng);
-    },
-  });
+  const coordinatesGrab = () => {
+    var e: any = map.locate();
+    setPosition(e._lastCenter);
+    console.log(position);
+  };
+  useEffect(() => {
+    coordinatesGrab();
+  }, []);
 
   // Object { lat: 27.8243602, lng: 79.83179299999999 }
+
   return (
     <>
       <form onSubmit={userDetails}>
@@ -118,20 +132,35 @@ const ModalForm = ({ onClose }: { onClose: () => void }) => {
               colorScheme="cyan"
               disabled
               placeholder="Latitude"
-              // value={position.lat}
-              width="50%"
+              value={position.lat}
+              width="40%"
+              mr={2}
             />
             <Input
               variant="outline"
               disabled
               colorScheme="cyan"
               placeholder="Longitude"
-              // value={position.lng}
-              width="50%"
+              value={position.lng}
+              width="40%"
+              mr={2}
             />
+            <Button onClick={coordinatesGrab} width="16%" mt={-1}>
+              <MdLocationSearching />
+            </Button>
           </FormControl>
 
-          <Button id="wow">Click me</Button>
+          <FormControl mt={4}>
+            <FormLabel>Number of Cylinders: </FormLabel>
+            <Input
+              variant="outline"
+              colorScheme="cyan"
+              type="number"
+              placeholder="Enter your name here... "
+              onChange={(e) => setCylinders(parseInt(e.target.value))}
+              value={cylinders}
+            />
+          </FormControl>
         </ModalBody>
 
         <ModalFooter>

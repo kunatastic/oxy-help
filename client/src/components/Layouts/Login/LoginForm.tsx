@@ -30,6 +30,8 @@ export default function LoginForm() {
       const response = await axios.post("/auth/login", loginUser);
       console.log(response.data);
 
+      localStorage.setItem("dont_change_this_user_id", response.data.id);
+
       logininfo?.getLoggedIn();
       history.replace("/");
     } catch (err) {

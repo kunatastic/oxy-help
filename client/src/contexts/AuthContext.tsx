@@ -12,6 +12,7 @@ export const AuthContextProvider: React.FC = ({ children }) => {
 
   const getLoggedIn = async () => {
     const loggedIn = await axios.get("/auth/loggedin");
+    console.log(loggedIn);
     setLoggedIn(loggedIn.data);
   };
 

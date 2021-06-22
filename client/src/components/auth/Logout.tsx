@@ -11,6 +11,8 @@ export default function Logout() {
 
   const logout = async () => {
     await axios.get("/auth/logout");
+
+    localStorage.clear();
     await login?.getLoggedIn();
     history.push("/");
   };
