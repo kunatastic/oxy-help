@@ -53,7 +53,7 @@ router.post("/", async (req:Request, res:Response) => {
 router.post("/login", async (req:Request, res:Response) => {
   try {
     const { email, password } = req.body;
-    console.log(email);
+    // console.log(email);
     const userExist = await User.findOne({ email: email });
     // console.log(userExist);
     if (userExist) {
@@ -64,13 +64,12 @@ router.post("/login", async (req:Request, res:Response) => {
 
       const token = jwt.sign({ id: userExist._id }, process.env.JWT_SECRET);
       // console.log(output, existUser, savedUser);
-      console.log(token);
+      // console.log(token);
 
       res
         .cookie("token", token, {
-          httpOnly: true,
-        })
-        .json({ id: userExist._id });
+          httpOnly: true
+        });
     }
   } catch (err) {
     console.log(err);
@@ -93,14 +92,20 @@ router.get("/hidden", auth, (req:Request, res:Response) => {
 });
 
 router.get("/loggedin", async (req:Request, res:Response) => {
+  // console.log(req.cookies);
+  
   try {
     const token = req.cookies.token;
-    if (!token) return res.json(false);
+    if (!token) {
+      console.log("false")
+      return res.json(false);
+    }
     jwt.verify(token, process.env.JWT_SECRET);
     console.log("true");
     res.send(true);
   } catch (err) {
     console.log(err);
+    console.log("false");
     res.json(false);
   }
 });
