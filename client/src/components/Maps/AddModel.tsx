@@ -59,7 +59,6 @@ const ModalForm = ({ onClose }: { onClose: () => void }) => {
     e.preventDefault();
 
     const payload = {
-      user_id: localStorage.getItem("dont_change_this_user_id"),
       name,
       mobileNumber,
       areaName,
@@ -68,7 +67,10 @@ const ModalForm = ({ onClose }: { onClose: () => void }) => {
     };
     console.log(payload);
 
-    const newLocation = await axios.post("/auth/map/newLocation", payload);
+    const newLocation = await axios.post(
+      "http://localhost:5000/auth/map/newLocation",
+      payload
+    );
     console.log(newLocation);
   };
 
@@ -79,6 +81,8 @@ const ModalForm = ({ onClose }: { onClose: () => void }) => {
     setPosition(e._lastCenter);
     console.log(position);
   };
+
+  // eslint-disable-next-line
   useEffect(() => {
     coordinatesGrab();
   }, []);

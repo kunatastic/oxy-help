@@ -30,7 +30,7 @@ export default function RegisterForm() {
       // console.log(registerUser);
 
       // const response = await axios.post("/auth/", registerUser);
-      await axios.post("/auth/", registerUser);
+      await axios.post("http://localhost:5000/auth/", registerUser);
       // console.log(response.data);
 
       logininfo?.getLoggedIn();

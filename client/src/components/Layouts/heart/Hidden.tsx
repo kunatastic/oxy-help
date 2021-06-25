@@ -8,7 +8,7 @@ import HiddenNav from "./HiddenNav";
 export default function Hidden() {
   return (
     <>
-      <Box height="100vh" color="blue.200">
+      <Box height="100vh">
         <MapContainer
           style={{ height: "100vh" }}
           center={[28.63576, 77.22445]}

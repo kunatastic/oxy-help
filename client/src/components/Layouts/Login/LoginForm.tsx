@@ -27,10 +27,11 @@ export default function LoginForm() {
       };
       // console.log(loginUser);
 
-      const response = await axios.post("/auth/login", loginUser);
+      const response = await axios.post(
+        "http://localhost:5000/auth/login",
+        loginUser
+      );
       console.log(response.data);
-
-      localStorage.setItem("dont_change_this_user_id", response.data.id);
 
       logininfo?.getLoggedIn();
       history.replace("/");
